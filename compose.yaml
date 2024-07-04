@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  logging_api:
+    image: ${IMG_URL}
+    command: ["python3", "search_benchmark/ranking/logging_api.py"]
+    deploy: 
+      mode: replicated
+      replicas: 1
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+  
+  questions:
+    image: ${IMG_URL}
+    command: ["python3", "search_benchmark/search/questions.py"]
+    deploy: 
+      mode: replicated
+      replicas: 0
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+  
+  responses:
+    image: ${IMG_URL}
+    command: ["python3", "search_benchmark/search/responses.py"]
+    deploy: 
+      mode: replicated
+      replicas: 1
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+  
+  ranking:
+    image: ${IMG_URL}
+    command: ["python3", "search_benchmark/ranking/ranking.py"]
+    deploy: 
+      mode: replicated
+      replicas: 1
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
