@@ -21,7 +21,7 @@ def run_benchmark(question_types, metrics, llms, providers):
     print("SENDING QUESTIONS")
     # Process questions for each question type
     for question_type in question_types:
-        process_questions(question_type, metrics, llms, providers, run_id, num_q=5)
+        process_questions(question_type, metrics, llms, providers, run_id, num_q=2000)
     
     # Run the Streamlit app
     streamlit_path = os.path.join(project_root, 'search_benchmark', 'evals', 'live_eval.py')
@@ -39,7 +39,9 @@ if __name__ == "__main__":
         {"name": "gpt-4o", "api": "openai", "max_tokens": 1024, "temperature": 0},
         {"name": "claude-3-5-sonnet-20240620", "api": "anthropic", "max_tokens": 1024, "temperature": 0}
     ]
-    default_providers = ['lumina', 'exa', 'google_scholar', 'semantic_scholar']
+    default_providers = ['lumina', 'exa', 'google_scholar', 'semantic_scholar', "lumina_recursive"]
+    # default_providers = ['lumina', "lumina_recursive"]
+
 
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run benchmark with specified parameters")

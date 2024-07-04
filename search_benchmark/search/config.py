@@ -32,3 +32,5 @@ def get_exa_url():
     return os.environ.get('EXA_URL')
 def get_exa_content_url():
     return os.environ.get('EXA_CONTENT_URL')
+def get_reranker_url():
+    return os.environ.get('RERANKER_URL')

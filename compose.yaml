@@ -6,7 +6,7 @@ services:
     command: ["python3", "search_benchmark/ranking/logging_api.py"]
     deploy: 
       mode: replicated
-      replicas: 1
+      replicas: 10
     env_file:
       - path: .env
         required: false 
@@ -52,7 +52,7 @@ services:
     command: ["python3", "search_benchmark/search/responses.py"]
     deploy: 
       mode: replicated
-      replicas: 1
+      replicas: 50
     env_file:
       - path: .env
         required: false 
@@ -75,7 +75,7 @@ services:
     command: ["python3", "search_benchmark/ranking/ranking.py"]
     deploy: 
       mode: replicated
-      replicas: 1
+      replicas: 50
     env_file:
       - path: .env
         required: false 

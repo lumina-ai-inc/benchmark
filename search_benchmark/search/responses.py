@@ -12,7 +12,7 @@ import search_benchmark.search.lumina_search as lumina_search
 import search_benchmark.search.semantic_scholar_search as semantic_scholar_search
 import search_benchmark.search.google_scholar_search as google_scholar_search
 import search_benchmark.search.exa_search as exa_search
-# import search_benchmark.search.recursive_search as recursive_search  # Importing recursive_search
+import search_benchmark.search.recursive_search as recursive_search  # Importing recursive_search
 
 def process_search_request(payload):
     question = payload['question']
@@ -28,8 +28,8 @@ def process_search_request(payload):
             results['google_scholar'] = google_scholar_search.main(question)
         elif provider == 'exa':
             results['exa'] = exa_search.main(question)
-        # elif provider == 'lumina_recursive':
-        #     results['lumina_recursive'] = recursive_search.main(lumina_search.main, question, recursion_depth=1, page_size=10, page_size_per_recursion=3)  # Using recursive_search for lumina_recursive
+        elif provider == 'lumina_recursive':
+            results['lumina_recursive'] = recursive_search.main(lumina_search.main, question, recursion_depth=1, page_size=10, page_size_per_recursion=3)  # Using recursive_search for lumina_recursive
         time.sleep(0.05)  # Small sleep after each provider search
 
     return results

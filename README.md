@@ -2,9 +2,7 @@
 
 This repository contains a benchmark for evaluating the performance of different search engines in the context of academic search. We compare, Lumina, Semantic Scholar, Google Scholar, and Exa. This repo requires a `.env` file with API keys for each of these services. 
 
-You will also need a hosted postgres instance to log the benchmark results, and a `redis` instance for communication between the benchmark and the services. We reccomend using `Supabase` for the `postgres` instance, and a managed `redis` instance from `AWS` or `Azure`. You will also need to have `docker` installed to run the benchmark.
-
-NOTE: We have removed recursion from the benchmark code - we have services that include GPUs, to make it easier for general use, we have excluded it from this release.
+You will also need a hosted `postgres` instance to log the benchmark results, and a `redis` instance for communication between the benchmark and the services. We reccomend using `Supabase` for the `postgres` instance, and a managed `redis` instance from `AWS` or `Azure`. You will also need to have `docker` installed to run the benchmark. To run the benchmark with recursion, you will need to host a `reranker` service. We use the BGE Large raranker. 
 
 # Running the Benchmark
 
@@ -27,6 +25,7 @@ To run the benchmark, follow these steps:
    - EXA_CONTENT_URL ("https://api.exa.ai/contents")
    - IMG_URL ("index.docker.io/username/img:tag")
    - IMG_NAME ("username/img:tag")
+   - RERANKER_URL (host a reranker if you want to do recursive search)
 
    NOTE: The IMG_URL and IMG_NAME variables are used to specify the docker image to use for the benchmark, feel free to make your own (`main.sh` has comments to help you do this.).
 2. Make the `main.sh` script executable:
@@ -85,4 +84,5 @@ The script uses two question types: `generated_questions` and `user_queries`. Th
 - `generated_questions`: 9k AI-generated questions for benchmarking
 - `user_queries`: 9k real user queries from SciSpace for more realistic testing
 
+You don't need to run all questions, you can specifiy num questions in the `benchmark.py` file.
 You can modify these files or add new ones to customize the benchmark according to your needs.
