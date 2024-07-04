@@ -4,6 +4,8 @@ This repository contains a benchmark for evaluating the performance of different
 
 You will also need a hosted postgres instance to log the benchmark results, and a `redis` instance for communication between the benchmark and the services. We reccomend using `Supabase` for the `postgres` instance, and a managed `redis` instance from `AWS` or `Azure`. You will also need to have `docker` installed to run the benchmark.
 
+NOTE: We have removed recursion from the benchmark code - we have services that include GPUs, to make it easier for general use, we have excluded it from this release.
+
 # Running the Benchmark
 
 To run the benchmark, follow these steps:
@@ -45,9 +47,10 @@ To run the benchmark, follow these steps:
 
    Install the requirements:
    ```
+   python3 -m venv .venv
+   source .venv/bin/activate
    pip3 install -r requirements.txt
    ```
-
    Run the benchmark:
    ```
    python3 benchmark.py

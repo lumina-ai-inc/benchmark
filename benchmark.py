@@ -39,7 +39,7 @@ if __name__ == "__main__":
         {"name": "gpt-4o", "api": "openai", "max_tokens": 1024, "temperature": 0},
         {"name": "claude-3-5-sonnet-20240620", "api": "anthropic", "max_tokens": 1024, "temperature": 0}
     ]
-    default_providers = ['lumina', 'exa', 'google_scholar', 'semantic_scholar', 'lumina_recursive']
+    default_providers = ['lumina', 'exa', 'google_scholar', 'semantic_scholar']
 
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run benchmark with specified parameters")
