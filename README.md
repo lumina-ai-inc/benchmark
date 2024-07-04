@@ -64,7 +64,8 @@ The `main.sh` script performs the following actions:
 
 1. Starts the Docker services defined in `compose.yaml` - you can set `replicas` to run more than one instance of each service (provides considerable speedups)
 2. You can do `docker compose logs` to view the logs of your containers.
-
+3. You can run `docker compose down` to stop the containers.
+4. You can run `docker compose logs -f` to view benchmark logs
 
 ## About benchmark.py
 
