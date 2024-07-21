@@ -2,6 +2,9 @@ version: '3.8'
 
 services:
   logging_api:
+    depends_on:
+      - redis
+      - postgres
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/ranking/logging_api.py"]
     deploy: 
@@ -11,7 +14,7 @@ services:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_REDIS_URL=redis://redis:6379
       - PG_DB_NAME=${PG_DB_NAME}
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
@@ -25,6 +28,9 @@ services:
       - API_URL=${API_URL}
   
   questions:
+    depends_on:
+      - redis
+      - postgres
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/search/questions.py"]
     deploy: 
@@ -34,7 +40,7 @@ services:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_REDIS_URL=redis://redis:6379
       - PG_DB_NAME=${PG_DB_NAME}
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
@@ -48,6 +54,9 @@ services:
       - API_URL=${API_URL}
   
   responses:
+    depends_on:
+      - redis
+      - postgres
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/search/responses.py"]
     deploy: 
@@ -57,7 +66,7 @@ services:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_REDIS_URL=redis://redis:6379
       - PG_DB_NAME=${PG_DB_NAME}
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
@@ -71,6 +80,9 @@ services:
       - API_URL=${API_URL}
   
   ranking:
+    depends_on:
+      - redis
+      - postgres
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/ranking/ranking.py"]
     deploy: 
@@ -80,7 +92,7 @@ services:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=${PG_REDIS_URL}
+      - PG_REDIS_URL=redis://redis:6379
       - PG_DB_NAME=${PG_DB_NAME}
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
@@ -92,3 +104,26 @@ services:
       - SERP_API_KEY=${SERP_API_KEY}
       - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
       - API_URL=${API_URL}
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ${PG_DB_NAME}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  redis_data:
+  postgres_data:
