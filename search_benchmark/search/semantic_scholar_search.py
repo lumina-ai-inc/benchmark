@@ -74,6 +74,6 @@ def main(question):
     return process_question(question)
 
 if __name__ == "__main__":
-    sample_question = "What are the latest advancements in quantum computing?"
+    sample_question = "physics"
     result = main(sample_question)
     print(result)

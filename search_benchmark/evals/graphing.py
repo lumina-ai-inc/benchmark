@@ -14,20 +14,27 @@ def load_results_from_db(run_id):
     conn = get_db_connection()
     cur = conn.cursor()
     
-    query = """
-    SELECT provider, llm, score, question_type, metric
-    FROM eval
-    WHERE run_id::text = %s
-    """
+    if run_id is None:
+        query = """
+        SELECT provider, llm, score, question_type, metric
+        FROM eval
+        """
+        cur.execute(query)
+    else:
+        query = """
+        SELECT provider, llm, score, question_type, metric
+        FROM eval
+        WHERE run_id::text = %s
+        """
+        cur.execute(query, (run_id,))
     
-    cur.execute(query, (run_id,))
     results = cur.fetchall()
 
     cur.close()
     put_db_connection(conn)
     
     if not results:
-        print(f"No results found for run_id: {run_id}")
+        print(f"No results found" + (f" for run_id: {run_id}" if run_id else ""))
     else:
         print(f"Results loaded successfully")
     

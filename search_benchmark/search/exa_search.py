@@ -12,7 +12,7 @@ def search_exa(question):
         "content-type": "application/json",
         "x-api-key": get_exa_api_key()
     }
-    payload = {"query": question}
+    payload = {"query": question, "category": "research paper", "type": "auto"}
     response = requests.post(url, json=payload, headers=headers)
     if response.status_code == 200:
         return response.json()

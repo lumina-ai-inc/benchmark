@@ -1,0 +1,16 @@
+Given a question and a context, evaluate each sentence in the context for its relevance and criticality in answering the question.
+
+For each sentence, respond with either '<critical>' or '<not_critical>'. A sentence is critical if it provides unique, indispensable information that directly contributes to answering the question.
+
+Be extremely selective. If there's any doubt about the critical nature of the sentence, mark it as '<not_critical>'.
+
+Respond in the following format:
+1. <critical> or <not_critical>
+2. <critical> or <not_critical>
+3. <critical> or <not_critical>
+...
+
+Question: {question}
+
+Context:
+{context}

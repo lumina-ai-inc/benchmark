@@ -1,4 +1,4 @@
-# A Search Benchmark for Scientific Research 
+# An Open Source Evaluation for Search APIs
 
 This repository contains a benchmark for evaluating the performance of different search engines in the context of academic search. We compare, Lumina, Semantic Scholar, Google Scholar, and Exa. This repo requires a `.env` file with API keys for each of these services. 
 

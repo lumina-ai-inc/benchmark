@@ -19,3 +19,4 @@ cmd.sh
 /search_benchmark/dataset/output
 
 
+/search_benchmark/search/semantic_scholar_search_new.py

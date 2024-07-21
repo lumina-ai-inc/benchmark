@@ -30,6 +30,10 @@ def process_search_request(payload):
             results['exa'] = exa_search.main(question)
         elif provider == 'lumina_recursive':
             results['lumina_recursive'] = recursive_search.main(lumina_search.main, question, recursion_depth=1, page_size=10, page_size_per_recursion=3)  # Using recursive_search for lumina_recursive
+        elif provider == 'semantic_scholar_recursive':
+            results['semantic_scholar_recursive'] = recursive_search.main(semantic_scholar_search.main, question, recursion_depth=1, page_size=10, page_size_per_recursion=3)  # Using recursive_search for semantic_scholar_recursive
+        elif provider == 'google_scholar_recursive':
+            results['google_scholar_recursive'] = recursive_search.main(google_scholar_search.main, question, recursion_depth=1, page_size=10, page_size_per_recursion=3)  # Using recursive_search for google_scholar_recursive
         time.sleep(0.05)  # Small sleep after each provider search
 
     return results
