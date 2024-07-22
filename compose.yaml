@@ -4,7 +4,7 @@ services:
   logging_api:
     depends_on:
       - redis
-      - postgres
+      - pg
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/ranking/logging_api.py"]
     deploy: 
@@ -14,12 +14,12 @@ services:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=redis://redis:6379
-      - PG_DB_NAME=${PG_DB_NAME}
-      - PG_USER=${PG_USER}
-      - PG_PASSWORD=${PG_PASSWORD}
-      - PG_HOST=${PG_HOST}
-      - PG_PORT=${PG_PORT}
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - EXA_API_KEY=${EXA_API_KEY}
@@ -30,48 +30,50 @@ services:
   questions:
     depends_on:
       - redis
-      - postgres
+      - pg
     image: ${IMG_URL}
-    command: ["python3", "search_benchmark/search/questions.py"]
+    command: ["python3", "benchmark.py"]
     deploy: 
       mode: replicated
-      replicas: 0
+      replicas: 1
     env_file:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=redis://redis:6379
-      - PG_DB_NAME=${PG_DB_NAME}
-      - PG_USER=${PG_USER}
-      - PG_PASSWORD=${PG_PASSWORD}
-      - PG_HOST=${PG_HOST}
-      - PG_PORT=${PG_PORT}
+      - REDIS_URL=redis://localhost:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - EXA_API_KEY=${EXA_API_KEY}
       - SERP_API_KEY=${SERP_API_KEY}
       - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
       - API_URL=${API_URL}
+    ports:
+      - "8501:8501"
   
   responses:
     depends_on:
       - redis
-      - postgres
+      - pg
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/search/responses.py"]
     deploy: 
       mode: replicated
-      replicas: 50
+      replicas: 10
     env_file:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=redis://redis:6379
-      - PG_DB_NAME=${PG_DB_NAME}
-      - PG_USER=${PG_USER}
-      - PG_PASSWORD=${PG_PASSWORD}
-      - PG_HOST=${PG_HOST}
-      - PG_PORT=${PG_PORT}
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - EXA_API_KEY=${EXA_API_KEY}
@@ -82,22 +84,22 @@ services:
   ranking:
     depends_on:
       - redis
-      - postgres
+      - pg
     image: ${IMG_URL}
     command: ["python3", "search_benchmark/ranking/ranking.py"]
     deploy: 
       mode: replicated
-      replicas: 50
+      replicas: 10
     env_file:
       - path: .env
         required: false 
     environment:
-      - PG_REDIS_URL=redis://redis:6379
-      - PG_DB_NAME=${PG_DB_NAME}
-      - PG_USER=${PG_USER}
-      - PG_PASSWORD=${PG_PASSWORD}
-      - PG_HOST=${PG_HOST}
-      - PG_PORT=${PG_PORT}
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - EXA_API_KEY=${EXA_API_KEY}
@@ -112,18 +114,21 @@ services:
     volumes:
       - redis_data:/data
 
-  postgres:
-    image: postgres:13
+  pg:
+    image: postgres
+    shm_size: 128mb
     environment:
-      POSTGRES_DB: ${PG_DB_NAME}
-      POSTGRES_USER: ${PG_USER}
-      POSTGRES_PASSWORD: ${PG_PASSWORD}
-    ports:
-      - "5432:5432"
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
 
 
 volumes:
   redis_data:
-  postgres_data:
+  pg_data:

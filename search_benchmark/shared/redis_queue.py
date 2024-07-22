@@ -3,20 +3,24 @@ import sys
 import os
 import time
 from search_benchmark.shared.config import get_redis_url
+import dotenv
+
 class RedisQueue:
     def __init__(self, queue='task_queue', model=None):
         try:
-
+            dotenv.load_dotenv()
             timeout = 3600
             redis_url = get_redis_url()
             self._redis = redis.Redis.from_url(redis_url, socket_timeout=timeout)
             self._queue = queue
             self.model = model
+            print(f"Connected to Redis: {redis_url}")
         except Exception as e:
             print(f"Failed to connect to Redis: {e}")
 
     def send_to_queue(self, body):
         try:
+            print(f"Sending message to queue: {body}")
             self._redis.lpush(self._queue, body)
             print(f" [x] Sent {body}")
         except Exception as e:

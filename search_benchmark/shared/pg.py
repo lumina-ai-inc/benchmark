@@ -13,8 +13,18 @@ def get_db_connection():
     password = get_pg_password()
     host = get_pg_host()
     port = get_pg_port()
-    return psycopg2.connect(dbname=db_name, user=user, password=password, host=host, port=port)
+    
+    print(f"Connecting to database: {db_name}")
+    print(f"Host: {host}, Port: {port}")
+    print(f"User: {user}")
+    
+    connection = psycopg2.connect(dbname=db_name, user=user, password=password, host=host, port=port)
+    
+    print("Database connection established successfully")
+    
+    return connection
 
 def put_db_connection(connection):
     if connection:
         connection.close()
+

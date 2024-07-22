@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1720756044.45326 "/Users/ishaankapoor/Startup/benchmark/report/report.tex" "report.pdf" "report" 1720756044.99869 2
-  "/Users/ishaankapoor/Startup/benchmark/report/report.tex" 1720756043.59518 16063 df29ec189a4f7b4afc8512e0686bc08b ""
+["pdflatex"] 1721592831.77106 "/Users/ishaankapoor/Startup/benchmark/report/report.tex" "report.pdf" "report" 1721592832.35892 2
+  "/Users/ishaankapoor/Startup/benchmark/report/report.tex" 1721592830.76422 15753 055f964f31f941895a92db46ce1e906b ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -98,11 +98,11 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1712564086.07879 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1712564051 8221449 e6be4e7f73cf39949a66c543722e99f9 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "Benchmark_Overview_main.png" 1720658078.48319 427623 68739eba7d795aa54fb867008bd20b43 ""
-  "recursive_results.png" 1720518089.83705 54892 af43e4551e17b5f70ceeed499b4bdd4c ""
-  "report.aux" 1720756044.93708 3038 c89d60dfe4002238144aabd43ecd537e "pdflatex"
-  "report.out" 1720756044.93772 2750 74f6437325ab2557607739cbf7846dc5 "pdflatex"
-  "report.tex" 1720756043.59518 16063 df29ec189a4f7b4afc8512e0686bc08b ""
+  "Benchmark_Overview_main.png" 1721592830.76017 427623 68739eba7d795aa54fb867008bd20b43 ""
+  "recursive_results.png" 1721592830.7617 54892 af43e4551e17b5f70ceeed499b4bdd4c ""
+  "report.aux" 1721592832.2942 3038 e310c5cc13ce12952429eefdd370b8f5 "pdflatex"
+  "report.out" 1721592832.29476 2750 74f6437325ab2557607739cbf7846dc5 "pdflatex"
+  "report.tex" 1721592830.76422 15753 055f964f31f941895a92db46ce1e906b ""
   "search_results.png" 0 -1 0 ""
   (generated)
   "report.aux"
