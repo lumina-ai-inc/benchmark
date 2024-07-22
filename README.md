@@ -10,6 +10,30 @@ You can pull and build the benchmark image from dockerhub with the following com
 ```
     docker pull index.docker.io/akhilesh99/benchmark:latest
 ```
+
+# Running the Benchmark
+
+   1. Clone the repo and cd into it
+   ```
+   git clone https://github.com/lumina-chat/benchmark.git
+   cd benchmark
+   ```
+
+   2. Set environment variables in .env in root of project.
+
+   3. pull the benchmark image from dockerhub with:
+   ```
+    docker pull index.docker.io/akhilesh99/benchmark:latest
+   ```
+   4. Run `docker compose up -d` to start the benchmark. This will start all of the services defined in the `compose.yaml` file.
+
+   ```
+      docker compose up -d 
+   ```
+   5. Run `docker compose logs -f questions`. This will print a Streamlit link to the benchmark dashboard to view progress.
+
+   6. To stop the benchmark, run `docker compose down`.
+
 # Components
 
 ## `.env`
@@ -74,30 +98,6 @@ The script uses two question types: `generated_questions` and `user_queries`. Th
 
 You don't need to run all questions, you can specifiy num questions in the `benchmark.py` file.
 You can modify these files or add new ones to customize the benchmark according to your needs.
-
-# Running the Benchmark
-
-   1. Clone the repo and cd into it
-   ```
-   git clone https://github.com/lumina-chat/benchmark.git
-   cd benchmark
-   ```
-
-   2. Set environment variables in .env in root of project.
-
-   3. pull the benchmark image from dockerhub with:
-   ```
-    docker pull index.docker.io/akhilesh99/benchmark:latest
-   ```
-   4. Run `docker compose up -d` to start the benchmark. This will start all of the services defined in the `compose.yaml` file.
-
-   ```
-      docker compose up -d 
-   ```
-   5. Run `docker compose logs -f questions`. This will print a Streamlit link to the benchmark dashboard to view progress.
-
-   6. To stop the benchmark, run `docker compose down`.
-
 
 # Notes
 
