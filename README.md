@@ -91,3 +91,14 @@ You can modify these files or add new ones to customize the benchmark according 
    4. Run `docker compose logs -f questions`. This will print a Streamlit link to the benchmark dashboard to view progress.
 
    5. To stop the benchmark, run `docker compose down`.
+
+
+# Notes
+
+To run adminer, visit localhost:8080 and use the following credentials to log in:
+
+- System: PostgreSQL
+- Server: pg
+- Username: postgres
+- Password: postrges
+- Database: postgres
