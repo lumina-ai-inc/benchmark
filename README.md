@@ -8,7 +8,7 @@ We setup a local `postgres` instance to log the benchmark results, and a local `
 
 You can pull and build the benchmark image from dockerhub with the following command from the root dir of the project:
 ```
-./docker.sh
+    docker pull index.docker.io/akhilesh99/benchmark:latest
 ```
 # Components
 
@@ -81,7 +81,7 @@ You can modify these files or add new ones to customize the benchmark according 
 
    2. pull the benchmark image from dockerhub with:
    ```
-    ./docker.sh 
+    docker pull index.docker.io/akhilesh99/benchmark:latest
    ```
    3. Run `docker compose up -d` to start the benchmark. This will start all of the services defined in the `compose.yaml` file.
 

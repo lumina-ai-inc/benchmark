@@ -20,3 +20,4 @@ cmd.sh
 
 
 /search_benchmark/search/semantic_scholar_search_new.py
+docker.sh
