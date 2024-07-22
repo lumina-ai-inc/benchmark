@@ -21,7 +21,7 @@ def run_benchmark(question_types, metrics, llms, providers):
     print("SENDING QUESTIONS")
     # Process questions for each question type
     for question_type in question_types:
-        process_questions(question_type, metrics, llms, providers, run_id, num_q=5)
+        process_questions(question_type, metrics, llms, providers, run_id, num_q=500)
     
     # Run the Streamlit app
     streamlit_path = os.path.join(project_root, 'search_benchmark', 'evals', 'live_eval.py')

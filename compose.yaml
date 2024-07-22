@@ -32,7 +32,7 @@ services:
       - redis
       - pg
     image: akhilesh99/benchmark:latest
-    command: ["python3", "search_benchmark/search/questions.py"]
+    command: ["python3", "benchmark.py"]
     deploy: 
       mode: replicated
       replicas: 1
@@ -40,7 +40,7 @@ services:
       - path: .env
         required: false 
     environment:
-      - REDIS_URL=redis://localhost:6379
+      - REDIS_URL=redis://redis:6379
       - PG_DB_NAME=postgres
       - PG_USER=postgres
       - PG_PASSWORD=postgres
