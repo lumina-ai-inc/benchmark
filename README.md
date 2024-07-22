@@ -81,7 +81,7 @@ You can modify these files or add new ones to customize the benchmark according 
 
    2. pull the benchmark image from dockerhub with:
    ```
-   docker pull index.docker.io/akhilesh99/benchmark:latest 
+    ./docker.sh 
    ```
    3. Run `docker compose up -d` to start the benchmark. This will start all of the services defined in the `compose.yaml` file.
 

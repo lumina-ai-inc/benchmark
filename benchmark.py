@@ -52,4 +52,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Run benchmark with parsed arguments
-    run_benchmark(args.question_types, args.metrics, args.llms, args.providers)
+    run_benchmark(args.question_types, args.metrics, args.llms, args.providers, args.num_q)
