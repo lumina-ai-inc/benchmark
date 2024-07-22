@@ -1,0 +1,23 @@
+.whisper
+.venv
+.lh
+.env
+__pycache__
+.DS_Store
+.idea
+.vscode
+/results
+cmd.sh
+
+/search_benchmark/dataset/output/
+# /search_benchmark/dataset/generated_questions.jsonl
+# /search_benchmark/dataset/user_queries.jsonl
+
+# /search_benchmark/search/recursive_search.py
+/search_benchmark/search/lumina_recursive_search_new.py
+/search_benchmark/dataset/scripts
+/search_benchmark/dataset/output
+
+
+/search_benchmark/search/semantic_scholar_search_new.py
+docker.sh

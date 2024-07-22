@@ -1,0 +1,12 @@
+redis
+psycopg2-binary
+anthropic
+ragas
+datasets
+requests
+openai 
+matplotlib 
+numpy
+streamlit
+exa_py
+python-dotenv

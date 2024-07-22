@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  logging_api:
+    depends_on:
+      - redis
+      - pg
+    image: akhilesh99/benchmark:latest
+    command: ["python3", "search_benchmark/ranking/logging_api.py"]
+    deploy: 
+      mode: replicated
+      replicas: 10
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+  
+  questions:
+    depends_on:
+      - redis
+      - pg
+    image: akhilesh99/benchmark:latest
+    command: ["python3", "benchmark.py"]
+    deploy: 
+      mode: replicated
+      replicas: 1
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+    ports:
+      - "8501:8501"
+  
+  responses:
+    depends_on:
+      - redis
+      - pg
+    image: akhilesh99/benchmark:latest
+    command: ["python3", "search_benchmark/search/responses.py"]
+    deploy: 
+      mode: replicated
+      replicas: 10
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+  
+  ranking:
+    depends_on:
+      - redis
+      - pg
+    image: akhilesh99/benchmark:latest
+    command: ["python3", "search_benchmark/ranking/ranking.py"]
+    deploy: 
+      mode: replicated
+      replicas: 10
+    env_file:
+      - path: .env
+        required: false 
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PG_DB_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_HOST=pg
+      - PG_PORT=5432
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - EXA_API_KEY=${EXA_API_KEY}
+      - SERP_API_KEY=${SERP_API_KEY}
+      - SEMANTIC_SCHOLAR_API_KEY=${SEMANTIC_SCHOLAR_API_KEY}
+      - API_URL=${API_URL}
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  pg:
+    image: postgres
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+
+volumes:
+  redis_data:
+  pg_data:
