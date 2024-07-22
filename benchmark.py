@@ -13,16 +13,16 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(project_root)
 
 from search_benchmark.search.questions import main as process_questions
-from config import get_question_types, get_metrics, get_llms, get_providers
+from config import get_question_types, get_metrics, get_llms, get_providers, get_num_q
 
-def run_benchmark(question_types, metrics, llms, providers):
+def run_benchmark(question_types, metrics, llms, providers, num_q):
     # Generate a unique run ID
     run_id = str(uuid.uuid4())
     print(f"Run ID: {run_id}")
     print("SENDING QUESTIONS")
     # Process questions for each question type
     for question_type in question_types:
-        process_questions(question_type, metrics, llms, providers, run_id, num_q=500)
+        process_questions(question_type, metrics, llms, providers, run_id, num_q=num_q)
     
     # Run the Streamlit app
     streamlit_path = os.path.join(project_root, 'search_benchmark', 'evals', 'live_eval.py')
@@ -38,6 +38,7 @@ if __name__ == "__main__":
     default_metrics = get_metrics()
     default_llms = get_llms()
     default_providers = get_providers()
+    default_num_q = get_num_q()
 
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run benchmark with specified parameters")
@@ -45,6 +46,7 @@ if __name__ == "__main__":
     parser.add_argument("--metrics", nargs="+", default=default_metrics, help="List of metrics")
     parser.add_argument("--llms", type=json.loads, default=default_llms, help="JSON string of LLM configurations")
     parser.add_argument("--providers", nargs="+", default=default_providers, help="List of providers")
+    parser.add_argument("--num_q", type=int, default=default_num_q, help="Number of questions to send to each provider")
 
     # Parse arguments
     args = parser.parse_args()

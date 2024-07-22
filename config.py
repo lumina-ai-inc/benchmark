@@ -5,6 +5,9 @@ import json
 # Load environment variables from .env file
 load_dotenv()
 
+def get_num_q():
+    return os.getenv('NUM_Q', 500)
+
 def get_redis_url():
     return os.getenv('REDIS_URL')
 
