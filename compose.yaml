@@ -5,7 +5,7 @@ services:
     depends_on:
       - redis
       - pg
-    image: ${IMG_URL}
+    image: akhilesh99/benchmark:latest
     command: ["python3", "search_benchmark/ranking/logging_api.py"]
     deploy: 
       mode: replicated
@@ -31,8 +31,8 @@ services:
     depends_on:
       - redis
       - pg
-    image: ${IMG_URL}
-    command: ["python3", "benchmark.py"]
+    image: akhilesh99/benchmark:latest
+    command: ["python3", "search_benchmark/search/questions.py"]
     deploy: 
       mode: replicated
       replicas: 1
@@ -59,7 +59,7 @@ services:
     depends_on:
       - redis
       - pg
-    image: ${IMG_URL}
+    image: akhilesh99/benchmark:latest
     command: ["python3", "search_benchmark/search/responses.py"]
     deploy: 
       mode: replicated
@@ -85,7 +85,7 @@ services:
     depends_on:
       - redis
       - pg
-    image: ${IMG_URL}
+    image: akhilesh99/benchmark:latest
     command: ["python3", "search_benchmark/ranking/ranking.py"]
     deploy: 
       mode: replicated

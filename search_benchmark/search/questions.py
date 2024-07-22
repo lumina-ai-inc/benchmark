@@ -56,11 +56,11 @@ if __name__ == "__main__":
     question_types = ['generated_questions', 'user_queries']
     metrics = ['ctx_relevancy']
     llms = [
-        {"name": "gpt-4o", "api": "openai", "max_tokens": 1024, "temperature": 0},
-        {"name": "claude-3-sonnet-20240229", "api": "anthropic", "max_tokens": 1024, "temperature": 0},
-        {"name": "claude-3-haiku-20240307", "api": "anthropic", "max_tokens": 1024, "temperature": 0}
+        {"name": "gpt-4o", "api": "openai", "max_tokens": 1024, "temperature": 0}
+        # {"name": "claude-3-sonnet-20240229", "api": "anthropic", "max_tokens": 1024, "temperature": 0},
+        # {"name": "claude-3-haiku-20240307", "api": "anthropic", "max_tokens": 1024, "temperature": 0}
     ]
-    providers = ['lumina_recursive']
+    providers = ['lumina', 'google_scholar', 'semantic_scholar']
     # providers = ['lumina_recursive']
     run_id = str(uuid.uuid4())
 
