@@ -13,6 +13,7 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(project_root)
 
 from search_benchmark.search.questions import main as process_questions
+from config import get_question_types, get_metrics, get_llms, get_providers
 
 def run_benchmark(question_types, metrics, llms, providers):
     # Generate a unique run ID
@@ -32,21 +33,11 @@ def run_benchmark(question_types, metrics, llms, providers):
         print(f"Error: The file {streamlit_path} does not exist.")
 
 if __name__ == "__main__":
-    # Define default values
-    default_question_types = ['user_queries', 'generated_questions']
-    # default_metrics = ['ctx_relevancy', 'ctx_precision']
-    default_metrics = ['ctx_relevancy']
-
-    default_llms = [
-        {"name": "gpt-4o", "api": "openai", "max_tokens": 1024, "temperature": 0}
-        # {"name": "claude-3-5-sonnet-20240620", "api": "anthropic", "max_tokens": 1024, "temperature": 0},
-        # {"name": "claude-3-haiku-20240307", "api": "anthropic", "max_tokens": 1024, "temperature": 0}
-    ]
-    default_providers = ['lumina', 'google_scholar', 'semantic_scholar']
-    # default_providers = ['lumina', 'google_scholar', 'semantic_scholar', 'exa',"lumina_recursive", "google_scholar_recursive", "semantic_scholar_recursive"]
-
-    # default_providers = ['lumina', "lumina_recursive"]
-
+    # Define default values from config
+    default_question_types = get_question_types()
+    default_metrics = get_metrics()
+    default_llms = get_llms()
+    default_providers = get_providers()
 
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run benchmark with specified parameters")
@@ -60,6 +51,3 @@ if __name__ == "__main__":
 
     # Run benchmark with parsed arguments
     run_benchmark(args.question_types, args.metrics, args.llms, args.providers)
-# ,
-        # {"name": "claude-3-sonnet-20240229", "api": "anthropic", "max_tokens": 1024, "temperature": 0},
-        # {"name": "claude-3-haiku-20240307", "api": "anthropic", "max_tokens": 1024, "temperature": 0}

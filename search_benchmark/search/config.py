@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import json
 
 # Load environment variables from .env file
 load_dotenv()
@@ -48,3 +49,17 @@ def get_exa_content_url():
 
 def get_reranker_url():
     return os.getenv('RERANKER_URL')
+
+def get_question_types():
+    load_dotenv()
+    return os.getenv('QUESTION_TYPES', 'user_queries,generated_questions').split(',')
+
+def get_metrics():
+    return os.getenv('METRICS', 'ctx_relevancy').split(',')
+
+def get_llms():
+    llms_str = os.getenv('LLMS', '[{"name": "gpt-4o", "api": "openai", "max_tokens": 1024, "temperature": 0}]')
+    return json.loads(llms_str)
+
+def get_providers():
+    return os.getenv('PROVIDERS', 'lumina,google_scholar,semantic_scholar').split(',')

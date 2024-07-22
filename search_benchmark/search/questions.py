@@ -10,7 +10,8 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.append(project_root)
 
 from search_benchmark.shared.redis_queue import RedisQueue
-from search_benchmark.search.config import get_redis_url  # Import the get_redis_url function
+from config import get_redis_url
+
 def main(question_type, metrics, llms, providers, run_id, num_q=0):
     questions_file = os.path.join(project_root, 'search_benchmark', 'dataset', f'{question_type}.jsonl')
     print(f"Loading questions from file: {questions_file}")
