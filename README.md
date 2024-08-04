@@ -1,6 +1,6 @@
 # An Open Source Evaluation for Search APIs
 
-This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines. You can plug-and-play search API's, to begin, we are comparing the efficacy of research paper search engines. We specifically compare Lumina, Semantic Scholar, and Google Scholar (via SERP) focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess the the context relevancy and the context precision of each search result, for the top 10 search results returned by each search provider. We aim to have as fair of an evaluation as possible. We evaluate the default search results returned by each provider and use zero shot (no recursion or LLM improvement) as the default for the search for all providers (lumina, exa, google scholar, semantic scholar). 
+This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines. You can plug-and-play search API's, and this benchmark works natively with lumina, exa, semantic scholar and SERP API. To begin, we are comparing the efficacy of research paper search engines. We specifically compare Lumina, Semantic Scholar, and Google Scholar (via SERP) focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess the the context relevancy and the context precision of each search result, for the top 10 search results returned by each search provider. We aim to have as fair of an evaluation as possible. We evaluate the default search results returned by each provider and use zero shot (no recursion or LLM improvement) as the default for the search for all providers (lumina, google scholar, semantic scholar). 
 
 
 # Our most recent result.
@@ -98,7 +98,7 @@ The `benchmark.py` script is run separately and performs the actual benchmarking
 - Question types: `generated_questions` and `user_queries` 
 - Metrics: `ctx_relevancy`
 - LLMs: Any OpenAI or Anthropic model
-- Providers: Lumina, Exa, Google Scholar, and Semantic Scholar
+- Providers: Lumina, Google Scholar, and Semantic Scholar
 
 You can also create your own custom question datasets for benchmarking. Simply add your JSONL file to the `search_benchmark/dataset` folder and use its name (without the .jsonl extension) as a question type when running the benchmark.
 
