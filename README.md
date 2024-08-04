@@ -3,7 +3,7 @@
 This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines. You can plug-and-play search API's, and this benchmark works natively with lumina, exa, semantic scholar and SERP API. To begin, we are comparing the efficacy of research paper search engines. We specifically compare Lumina, Semantic Scholar, and Google Scholar (via SERP) focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess the the context relevancy and the context precision of each search result, for the top 10 search results returned by each search provider. We aim to have as fair of an evaluation as possible. We evaluate the default search results returned by each provider and use zero shot (no recursion or LLM improvement) as the default for the search for all providers (lumina, google scholar, semantic scholar). 
 
 
-# Our most recent result.
+# Our most recent result - Lumina is up to 11x better.
 
 Our most recent result is a comparison between Lumina, Lumina Recursive, Semantic Scholar, Google Scholar. 
 
