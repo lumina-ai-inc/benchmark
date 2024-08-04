@@ -10,8 +10,8 @@ Our most recent result is a comparison between Lumina, Lumina Recursive, Semanti
 ![Benchmark Results](search_benchmark/results/August-03-2024.png)
 
 We measured context relevancy for the top 10 search results returned by each search provider. 
-- Base Search: We revieced a 4.8x multiple over Google Scolar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search.
-- Lumina Recursion: We revieced a 6.8x multiple over Google Scolar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
+- Base Search: We received a 4.8x multiple over Google Scholar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search.
+- Lumina Recursion: We received a 6.8x multiple over Google Scholar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
 
 
 
@@ -20,7 +20,7 @@ We measured context relevancy for the top 10 search results returned by each sea
 
 This repo requires a `.env` file with API keys for each of these services. To get a lumina API_URL for lumina, and gain access to our scientific search API, you can book a meeting with me at https://cal.com/ishaank99/lumina-api.
 
-We setup a local `postgres` instance to log the benchmark results, and a local `redis` instance for communication between the benchmark and the services. To run the benchmark with recursion, you will need to host a `reranker` service. We use the BGE Large raranker. By default this is turned off. 
+We setup a local `postgres` instance to log the benchmark results, and a local `redis` instance for communication between the benchmark and the services. To run the benchmark with recursion, you will need to host a `reranker` service. We use the BGE Large reranker. By default this is turned off. 
 
 You can pull and build the benchmark image from dockerhub with the following command from the root dir of the project:
 ```
@@ -111,8 +111,45 @@ The script uses two question types: `generated_questions` and `user_queries`. Th
 - `generated_questions`: 9k AI-generated questions for benchmarking
 - `user_queries`: 9k real user queries from SciSpace for more realistic testing
 
-You don't need to run all questions, you can specifiy num questions in the `benchmark.py` file.
+You don't need to run all questions, you can specify num questions in the `benchmark.py` file.
 You can modify these files or add new ones to customize the benchmark according to your needs.
+
+### Recursive search
+
+The recursive search algorithm enhances search results by using an LLM to generate new questions based on initial search results. This process helps to fill gaps in the original results and provide more comprehensive coverage of the topic.
+
+1. **Initial Search**: 
+   - Perform an initial search using the provided question.
+   - Limit results to the specified `page_size_per_recursion`.
+
+2. **Generate New Questions**:
+   - For each search result:
+     - Use an LLM to analyze the result and the original question.
+     - Generate new, more specific questions that address unanswered aspects. The prompt is as follows:
+   ```
+   Based on the user's query: "{question}", 
+
+   the search result is: 
+      {result}
+
+   Identify parts of the user's query that were unanswered or need further refinement, and suggest a refined search query to help find better search results. 
+   There should be variation in length, complexity, and specificity across the queries. 
+   The query must be based on the detailed concepts, key-terms, hard values and facts in the result you've been provided.
+   Wrap it in tags <query>new_query</query>.
+   ```
+
+3. **Recursive Search**:
+   - Perform searches using the newly generated questions.
+   - Repeat steps 1-3 until `recursion_depth` is reached.
+
+4. **Result Processing**:
+   - Combine results from all recursion levels.
+   - Remove duplicate results based on the content of the chunks.
+
+5. **Reranking**:
+   - Use a reranker model to sort the combined results.
+   - Return the top `page_size` results.
+
 
 # Notes
 
