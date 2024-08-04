@@ -1,8 +1,22 @@
 # An Open Source Evaluation for Search APIs
 
-This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines in the academic research domain. We specifically compare Lumina, Semantic Scholar, Google Scholar, and Exa, focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess the quality of search results provided by each engine, ensuring a robust analysis of their effectiveness in delivering relevant and precise information to researchers.
+This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines. You can plug-and-play search API's, to begin, we are comparing the efficacy of research paper search engines. We specifically compare Lumina, Semantic Scholar, Google Scholar (via SERP), and Exa, focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess the the context relevancy and the context precision of each search result, for the top 10 search results returned by each search provider. We aim to have as fair of an evaluation as possible. We evaluate the default search results returned by each provider and use zero shot (no recursion or LLM improvement) as the default for the search for all providers (lumina, exa, google scholar, semantic scholar). 
 
-This repo requires a `.env` file with API keys for each of these services. 
+
+# Most recent result.
+
+Our most recent result is a comparison between Lumina, Lumina Recursive, Semantic Scholar, Google Scholar. 
+
+![Benchmark Results](search_benchmark/results/August-03-2024.png)
+
+We measured context relevancy for the top 10 search results returned by each search provider. We revieced a 4.8x multiple over Google Scolar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search. For recursion, we revieced a 6.8x multiple over Google Scolar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
+
+
+
+
+# Running the Benchmark
+
+This repo requires a `.env` file with API keys for each of these services. To get a lumina API_URL for lumina, and gain access to our scientific search API, you can book a meeting with me at https://cal.com/ishaank99/lumina-api.
 
 We setup a local `postgres` instance to log the benchmark results, and a local `redis` instance for communication between the benchmark and the services. To run the benchmark with recursion, you will need to host a `reranker` service. We use the BGE Large raranker. By default this is turned off. 
 
@@ -11,7 +25,6 @@ You can pull and build the benchmark image from dockerhub with the following com
     docker pull index.docker.io/akhilesh99/benchmark:latest
 ```
 
-# Running the Benchmark
 
    1. Clone the repo and cd into it
    ```
