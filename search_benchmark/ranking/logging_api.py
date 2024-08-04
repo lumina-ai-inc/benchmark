@@ -21,7 +21,7 @@ def get_db_connection():
 
 # Listen to the Redis queue 'table_logs'
 def listen_to_table_logs():
-    queue = RedisQueue('requests')
+    queue = RedisQueue('table_logs')
     queue.start_consuming(process_message)
 
 def process_message(message):
