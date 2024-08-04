@@ -9,7 +9,9 @@ Our most recent result is a comparison between Lumina, Lumina Recursive, Semanti
 
 ![Benchmark Results](search_benchmark/results/August-03-2024.png)
 
-We measured context relevancy for the top 10 search results returned by each search provider. We revieced a 4.8x multiple over Google Scolar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search. For recursion, we revieced a 6.8x multiple over Google Scolar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
+We measured context relevancy for the top 10 search results returned by each search provider. 
+- Base Search: We revieced a 4.8x multiple over Google Scolar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search.
+- Lumina Recursion: We revieced a 6.8x multiple over Google Scolar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
 
 
 
