@@ -13,7 +13,7 @@ We measured context relevancy for the top 10 search results returned by each sea
 - Lumina Base: We received a 4.8x multiple over Google Scholar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search.
 - Lumina Pro: We received a 6.8x multiple over Google Scholar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
 
-**Lumina consistently delivers 2-3 highly relevant results across diverse queries, outperforming Google Scholar and Semantic Scholar, which provide a single highly relevant result only 50% and 30% of the time, respectively.**
+**Lumina consistently delivers 2-3 highly relevant results a 100% of the time, outperforming Google Scholar and Semantic Scholar, which provide 1 highly relevant result only 50% and 30% of the time, respectively.**
 
 
 # Running the Benchmark
