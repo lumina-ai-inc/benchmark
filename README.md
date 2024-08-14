@@ -93,7 +93,7 @@ The `compose.yaml` file orchestrates the deployment of all services required for
 - **adminer**: A web-based database management tool for interacting with the PostgreSQL database.
 
 This setup allows for efficient benchmarking and evaluation of different search APIs.
-## benchmark.py
+## `benchmark.py`
 
 The `benchmark.py` script is run separately and performs the actual benchmarking with the following parameters:
 
