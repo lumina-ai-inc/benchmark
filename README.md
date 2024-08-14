@@ -1,6 +1,6 @@
 # An Open Source Evaluation for Search APIs
 
-This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines. You can plug-and-play search API's, and this benchmark works natively with lumina, exa, semantic scholar and SERP API. To begin, we are comparing the efficacy of research paper search engines. We specifically compare Lumina, Semantic Scholar, and Google Scholar (via SERP) focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess the context relevancy and the context precision of each search result, for the top 10 search results returned by each search provider. We aim to have as fair of an evaluation as possible. We evaluate the search results returned by each provider and use zero shot (no recursion or LLM improvement) as the default method. 
+This repository presents a comprehensive benchmark designed to evaluate the performance of various search engines. You can plug-and-play search APIs, and this benchmark works natively with Lumina, exa, semantic scholar, and SERP API. To begin, we are comparing the efficacy of research paper search engines. We specifically compare Lumina, Semantic Scholar, and Google Scholar (via SERP) focusing on two key metrics: Context Relevance and Context Precision. By employing large language models (LLMs) as evaluators, we assess each search result's context relevancy and context precision, for the top 10 search results returned by each search provider. We aim to have as fair of an evaluation as possible. We evaluate the search results returned by each provider and use zero shot (no recursion or LLM improvement) as the default method. 
 
 
 # Our most recent result - Lumina is up to 11x better.
@@ -9,9 +9,9 @@ Our most recent result is a comparison between Lumina Base, Lumina Recursive, Se
 
 ![Benchmark Results](search_benchmark/results/August-03-2024.png)
 
-We measured context relevancy for the top 10 search results returned by each search provider. 
-- Lumina Base: We received a 4.8x multiple over Google Scholar and a 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, for our base search.
-- Lumina Pro: We received a 6.8x multiple over Google Scholar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each, with one recursion and a page size (number of search results) of 10, and 3 questions.
+We measured context relevancy for each search provider's top 10 search results. 
+- Lumina Base: For our base search, we received a 4.8x multiple over Google Scholar and an 8x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each.
+- Lumina Recursive: We received a 6.8x multiple over Google Scholar and 11.3x multiple over Semantic Scholar over our generated questions dataset for ~2470 queries each.
 
 **Lumina consistently delivers 2-3 highly relevant results for every query - outperforming Google Scholar and Semantic Scholar, which provide 1 highly relevant result for 50% and 30% of the queries, respectively.**
 
@@ -20,9 +20,9 @@ We measured context relevancy for the top 10 search results returned by each sea
 
 This repo requires a `.env` file with API keys for each of these services. To get a lumina API_URL for lumina, and gain access to our scientific search API, you can book a meeting with me at https://cal.com/ishaank99/lumina-api.
 
-We setup a local `postgres` instance to log the benchmark results, and a local `redis` instance for communication between the benchmark and the services. To run the benchmark with recursion, you will need to host a `reranker` service. We use the BGE Large reranker. By default this is turned off. 
+We setup a local `postgres` instance to log the benchmark results, and a local `redis` instance for communication between the benchmark and the services. To run the benchmark with recursion, you will need to host a `reranker` service. We use the BGE Large reranker. By default, this is turned off. 
 
-You can pull and build the benchmark image from dockerhub with the following command from the root dir of the project:
+You can pull the benchmark image with the following command from the root dir of the project:
 ```
     docker pull index.docker.io/akhilesh99/benchmark:latest
 ```
@@ -34,7 +34,7 @@ You can pull and build the benchmark image from dockerhub with the following com
    cd benchmark
    ```
 
-   2. Set environment variables in .env in root of project.
+   2. Set environment variables in .env in the root of the project.
 
    3. pull the benchmark image from dockerhub with:
    ```
@@ -53,7 +53,7 @@ You can pull and build the benchmark image from dockerhub with the following com
 
 ## `.env`
 
- We set up API keys, postgres and redis and config for the benchmark in this file. You should make a `.env` file at the root of the repo with these variables. We use the `config.py` file to access these variables, and the `.env` file to set them. The `python-dotenv` package is used to load the environment variables from the .env file. These include:
+ We set up API keys, postgres, redis, and config for the benchmark in this file. You should make a `.env` file at the root of the repo with these variables. We use the `config.py` file to access these variables, and the `.env` file to set them. The `python-dotenv` package is used to load the environment variables from the .env file. These include:
 
    - REDIS_URL
    - PG_DB_NAME
