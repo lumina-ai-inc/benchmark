@@ -5,7 +5,7 @@ This repository presents a comprehensive benchmark designed to evaluate the perf
 
 # Our most recent result - Lumina is up to 11x better.
 
-Our most recent result is a comparison between Lumina Base, Lumina Pro, Semantic Scholar, and Google Scholar. 
+Our most recent result is a comparison between Lumina Base, Lumina Recursive, Semantic Scholar, and Google Scholar. 
 
 ![Benchmark Results](search_benchmark/results/August-03-2024.png)
 
